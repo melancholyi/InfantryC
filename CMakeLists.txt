@@ -96,11 +96,11 @@ file(GLOB_RECURSE SOURCES
         ################# !!! my cmakelist begin !!! ####################
         # my src file
         "config/retarget/*.*"
-        "Shark/IMU/*.*"
+        "Shark/*.*"
         ################# !!! my cmakelist end   !!! ####################
         )
 
-set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F407IGHX_FLASH.ld)
+set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F407IGHX_FLASH.ld )
 
 add_link_options(-Wl,-gc-sections,--print-memory-usage,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map)
 add_link_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
@@ -112,7 +112,7 @@ link_libraries("arm_cortexM4lf_math.a")
 link_directories(${PROJECT_SOURCE_DIR}/Shark/IMU/AHRS/src)
 ################# !!! my cmakelist end   !!! ####################
 
-add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT})
+add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT} )
 
 ################# !!! my cmakelist begin !!! ####################
 # target link ahrs.lib

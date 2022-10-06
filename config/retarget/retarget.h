@@ -1,5 +1,8 @@
 #ifndef _RETARGET_H__
 #define _RETARGET_H__
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include "stm32f4xx_hal.h"
 #include <sys/stat.h>
@@ -19,4 +22,7 @@ int _read(int fd, char *ptr, int len);
 
 int _fstat(int fd, struct stat *st);
 
+#ifdef __cplusplus
+}
+#endif
 #endif //#ifndef _RETARGET_H__

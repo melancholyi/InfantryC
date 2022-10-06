@@ -32,11 +32,21 @@ rule C_COMPILER__InfantryC.2eelf_Debug
 
 
 #############################################
-# Rule for linking C executable.
+# Rule for compiling CXX files.
 
-rule C_EXECUTABLE_LINKER__InfantryC.2eelf_Debug
-  command = cmd.exe /C "$PRE_LINK && E:\ClionSTM32\gcc-arm-none-eabi-10.3-2021.10\bin\arm-none-eabi-gcc.exe $FLAGS $LINK_FLAGS $in -o $TARGET_FILE $LINK_PATH $LINK_LIBRARIES && $POST_BUILD"
-  description = Linking C executable $TARGET_FILE
+rule CXX_COMPILER__InfantryC.2eelf_Debug
+  depfile = $DEP_FILE
+  deps = gcc
+  command = E:\ClionSTM32\gcc-arm-none-eabi-10.3-2021.10\bin\arm-none-eabi-g++.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
+  description = Building CXX object $out
+
+
+#############################################
+# Rule for linking CXX executable.
+
+rule CXX_EXECUTABLE_LINKER__InfantryC.2eelf_Debug
+  command = cmd.exe /C "$PRE_LINK && E:\ClionSTM32\gcc-arm-none-eabi-10.3-2021.10\bin\arm-none-eabi-g++.exe $FLAGS $LINK_FLAGS $in -o $TARGET_FILE $LINK_PATH $LINK_LIBRARIES && $POST_BUILD"
+  description = Linking CXX executable $TARGET_FILE
   restat = $RESTAT
 
 

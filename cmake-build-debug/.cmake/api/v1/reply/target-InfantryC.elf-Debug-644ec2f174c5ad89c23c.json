@@ -287,7 +287,6 @@
 			},
 			"sourceIndexes" : 
 			[
-				10,
 				11,
 				12,
 				13,
@@ -300,9 +299,8 @@
 				20,
 				21,
 				22,
-				85,
-				86,
-				87,
+				23,
+				24,
 				88,
 				89,
 				90,
@@ -319,32 +317,36 @@
 				101,
 				102,
 				103,
+				104,
+				105,
 				106,
-				108,
-				109,
-				128,
-				129,
-				131,
+				107,
+				110,
+				112,
+				113,
 				132,
 				133,
-				134,
 				135,
-				145,
-				146,
-				152,
-				153,
-				154,
-				155,
+				136,
+				137,
+				138,
+				139,
+				149,
+				150,
 				156,
-				163,
-				164,
-				165,
-				166,
+				157,
+				158,
+				159,
+				160,
 				167,
-				172,
-				173,
-				174,
-				175
+				168,
+				169,
+				170,
+				171,
+				176,
+				177,
+				178,
+				180
 			]
 		},
 		{
@@ -503,7 +505,169 @@
 			"language" : "ASM",
 			"sourceIndexes" : 
 			[
-				23
+				25
+			]
+		},
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g"
+				},
+				{
+					"backtrace" : 9,
+					"fragment" : "-mfloat-abi=hard"
+				},
+				{
+					"backtrace" : 9,
+					"fragment" : "-mfpu=fpv4-sp-d16"
+				},
+				{
+					"backtrace" : 10,
+					"fragment" : "-mcpu=cortex-m4"
+				},
+				{
+					"backtrace" : 10,
+					"fragment" : "-mthumb"
+				},
+				{
+					"backtrace" : 10,
+					"fragment" : "-mthumb-interwork"
+				},
+				{
+					"backtrace" : 11,
+					"fragment" : "-ffunction-sections"
+				},
+				{
+					"backtrace" : 11,
+					"fragment" : "-fdata-sections"
+				},
+				{
+					"backtrace" : 11,
+					"fragment" : "-fno-common"
+				},
+				{
+					"backtrace" : 11,
+					"fragment" : "-fmessage-length=0"
+				},
+				{
+					"backtrace" : 13,
+					"fragment" : "-Og"
+				},
+				{
+					"backtrace" : 13,
+					"fragment" : "-g"
+				},
+				{
+					"fragment" : "-std=gnu++17"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 14,
+					"define" : "ARM_MATH_CM4"
+				},
+				{
+					"backtrace" : 14,
+					"define" : "ARM_MATH_MATRIX_CHECK"
+				},
+				{
+					"backtrace" : 14,
+					"define" : "ARM_MATH_ROUNDING"
+				},
+				{
+					"backtrace" : 15,
+					"define" : "DEBUG"
+				},
+				{
+					"backtrace" : 15,
+					"define" : "STM32F407xx"
+				},
+				{
+					"backtrace" : 15,
+					"define" : "USE_HAL_DRIVER"
+				},
+				{
+					"backtrace" : 15,
+					"define" : "__FPU_PRESENT=1U"
+				},
+				{
+					"backtrace" : 15,
+					"define" : "__FPU_USED=1U"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 16,
+					"path" : "E:/AADataFile/RM/infantry/InfantryC/Core/Inc"
+				},
+				{
+					"backtrace" : 16,
+					"path" : "E:/AADataFile/RM/infantry/InfantryC/Drivers/STM32F4xx_HAL_Driver/Inc"
+				},
+				{
+					"backtrace" : 16,
+					"path" : "E:/AADataFile/RM/infantry/InfantryC/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy"
+				},
+				{
+					"backtrace" : 16,
+					"path" : "E:/AADataFile/RM/infantry/InfantryC/Drivers/CMSIS/Device/ST/STM32F4xx/Include"
+				},
+				{
+					"backtrace" : 16,
+					"path" : "E:/AADataFile/RM/infantry/InfantryC/Drivers/CMSIS/Include"
+				},
+				{
+					"backtrace" : 16,
+					"path" : "E:/AADataFile/RM/infantry/InfantryC/Middlewares/Third_Party/FreeRTOS/Source/include"
+				},
+				{
+					"backtrace" : 16,
+					"path" : "E:/AADataFile/RM/infantry/InfantryC/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS"
+				},
+				{
+					"backtrace" : 16,
+					"path" : "E:/AADataFile/RM/infantry/InfantryC/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F"
+				},
+				{
+					"backtrace" : 16,
+					"path" : "E:/AADataFile/RM/infantry/InfantryC/Middlewares/ST/ARM/DSP/Inc"
+				},
+				{
+					"backtrace" : 16,
+					"path" : "E:/AADataFile/RM/infantry/InfantryC/config/retarget"
+				},
+				{
+					"backtrace" : 16,
+					"path" : "E:/AADataFile/RM/infantry/InfantryC/Shark/IMU/AHRS/inc"
+				},
+				{
+					"backtrace" : 16,
+					"path" : "E:/AADataFile/RM/infantry/InfantryC/Shark/IMU/bsp/inc"
+				},
+				{
+					"backtrace" : 16,
+					"path" : "E:/AADataFile/RM/infantry/InfantryC/Shark/IMU/driver/inc"
+				},
+				{
+					"backtrace" : 16,
+					"path" : "E:/AADataFile/RM/infantry/InfantryC/Shark/IMU/task/inc"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					1
+				],
+				"standard" : "17"
+			},
+			"sourceIndexes" : 
+			[
+				179
 			]
 		}
 	],
@@ -581,7 +745,7 @@
 				"role" : "libraries"
 			}
 		],
-		"language" : "C"
+		"language" : "CXX"
 	},
 	"name" : "InfantryC.elf",
 	"nameOnDisk" : "InfantryC.elf",
@@ -606,11 +770,10 @@
 				7,
 				8,
 				9,
-				24,
-				25,
+				10,
 				26,
+				27,
 				28,
-				29,
 				30,
 				31,
 				32,
@@ -630,8 +793,8 @@
 				46,
 				47,
 				48,
+				49,
 				50,
-				51,
 				52,
 				53,
 				54,
@@ -664,12 +827,11 @@
 				81,
 				82,
 				83,
-				104,
-				107,
-				110,
+				84,
+				85,
+				86,
+				108,
 				111,
-				112,
-				113,
 				114,
 				115,
 				116,
@@ -684,38 +846,41 @@
 				125,
 				126,
 				127,
+				128,
+				129,
 				130,
-				136,
-				137,
-				138,
-				139,
+				131,
+				134,
 				140,
 				141,
 				142,
 				143,
+				144,
+				145,
+				146,
 				147,
-				148,
-				149,
-				150,
 				151,
-				157,
-				158,
-				159,
-				160,
+				152,
+				153,
+				154,
+				155,
 				161,
 				162,
-				168,
-				169,
-				170,
-				171,
-				176
+				163,
+				164,
+				165,
+				166,
+				172,
+				173,
+				174,
+				175,
+				181
 			]
 		},
 		{
 			"name" : "Source Files",
 			"sourceIndexes" : 
 			[
-				10,
 				11,
 				12,
 				13,
@@ -728,9 +893,8 @@
 				20,
 				21,
 				22,
-				85,
-				86,
-				87,
+				23,
+				24,
 				88,
 				89,
 				90,
@@ -747,45 +911,50 @@
 				101,
 				102,
 				103,
+				104,
+				105,
 				106,
-				108,
-				109,
-				128,
-				129,
-				131,
+				107,
+				110,
+				112,
+				113,
 				132,
 				133,
-				134,
 				135,
-				145,
-				146,
-				152,
-				153,
-				154,
-				155,
+				136,
+				137,
+				138,
+				139,
+				149,
+				150,
 				156,
-				163,
-				164,
-				165,
-				166,
+				157,
+				158,
+				159,
+				160,
 				167,
-				172,
-				173,
-				174,
-				175
+				168,
+				169,
+				170,
+				171,
+				176,
+				177,
+				178,
+				179,
+				180
 			]
 		},
 		{
 			"name" : "",
 			"sourceIndexes" : 
 			[
-				23,
-				27,
-				49,
-				84,
-				105,
-				144,
-				177
+				25,
+				29,
+				51,
+				87,
+				109,
+				148,
+				182
 			]
 		}
 	],
@@ -794,6 +963,11 @@
 		{
 			"backtrace" : 1,
 			"path" : "Core/Inc/FreeRTOSConfig.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Core/Inc/can.h",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -840,6 +1014,12 @@
 			"backtrace" : 1,
 			"path" : "Core/Inc/usart.h",
 			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Core/Src/can.c",
+			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
@@ -1067,6 +1247,11 @@
 		},
 		{
 			"backtrace" : 1,
+			"path" : "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
 			"path" : "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h",
 			"sourceGroupIndex" : 0
 		},
@@ -1234,6 +1419,12 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_can.c",
 			"sourceGroupIndex" : 1
 		},
 		{
@@ -1722,6 +1913,12 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "Shark/IMU/task/src/remote_control.c",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 2,
+			"path" : "Shark/my_main.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{

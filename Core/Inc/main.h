@@ -53,22 +53,35 @@ extern "C" {
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
-
+void SystemClock_Config(void);
+void MX_FREERTOS_Init(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define CAN2_RX_Pin GPIO_PIN_5
+#define CAN2_RX_GPIO_Port GPIOB
 #define DEBUG_U6TX_Pin GPIO_PIN_14
 #define DEBUG_U6TX_GPIO_Port GPIOG
 #define BMI_SPI1_MISO_Pin GPIO_PIN_4
 #define BMI_SPI1_MISO_GPIO_Port GPIOB
 #define BMI_SPI1_SCK_Pin GPIO_PIN_3
 #define BMI_SPI1_SCK_GPIO_Port GPIOB
+#define VISCOM_U1RX_Pin GPIO_PIN_7
+#define VISCOM_U1RX_GPIO_Port GPIOB
+#define CAN2_TX_Pin GPIO_PIN_6
+#define CAN2_TX_GPIO_Port GPIOB
+#define CAN1_RX_Pin GPIO_PIN_0
+#define CAN1_RX_GPIO_Port GPIOD
 #define DBUS_U3RX_Pin GPIO_PIN_11
 #define DBUS_U3RX_GPIO_Port GPIOC
 #define DBUS_U3TX_Pin GPIO_PIN_10
 #define DBUS_U3TX_GPIO_Port GPIOC
 #define DEBUG_U6RX_Pin GPIO_PIN_9
 #define DEBUG_U6RX_GPIO_Port GPIOG
+#define CAN1_TX_Pin GPIO_PIN_1
+#define CAN1_TX_GPIO_Port GPIOD
+#define VISCOM_U1TX_Pin GPIO_PIN_9
+#define VISCOM_U1TX_GPIO_Port GPIOA
 #define IST_I2C3_SDA_Pin GPIO_PIN_9
 #define IST_I2C3_SDA_GPIO_Port GPIOC
 #define IST_I2C3_SCL_Pin GPIO_PIN_8
