@@ -112,7 +112,10 @@ void MX_FREERTOS_Init(void);
 #define CS1_GYRO_Pin GPIO_PIN_0
 #define CS1_GYRO_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
+#define LEDB_TOGGLE HAL_GPIO_TogglePin(LED_B_GPIO_Port,LED_B_Pin)
 
+#define LEDG_TOGGLE HAL_GPIO_TogglePin(LED_G_GPIO_Port,LED_G_Pin)
+#define LEDR_TOGGLE HAL_GPIO_TogglePin(LED_R_GPIO_Port,LED_R_Pin)
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

@@ -113,7 +113,7 @@ void MX_FREERTOS_Init(void) {
 
   /* Create the thread(s) */
   /* definition and creation of DebugTask */
-  osThreadDef(DebugTask, StartDebugTask, osPriorityLow, 0, 1024);
+  osThreadDef(DebugTask, StartDebugTask, osPriorityNormal, 0, 1024);
   DebugTaskHandle = osThreadCreate(osThread(DebugTask), NULL);
 
   /* definition and creation of ImuTask */
