@@ -8,6 +8,7 @@ namespace communication {
         uint8_t head;
         uint8_t tail;
         uint8_t check;
+
         uint32_t packet_id;
         float yaw_target;
         float pitch_target;
@@ -17,7 +18,7 @@ namespace communication {
     struct SendToVision{
 
     };
-
+    //TODO:暂时串口通信先用8位数据包进行测试，后续实际开发时候，需要更改
     class ComVision : public TransporterUsart<8>{
     public:
         explicit ComVision(UART_HandleTypeDef &huart);

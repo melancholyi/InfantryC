@@ -14,7 +14,6 @@ namespace communication {
         if(isRecFlag()){
             buf_rx_.getData(0,vision_msg_.head);
             buf_rx_.getData(7,vision_msg_.tail);
-
             /**reopen DMA usart**/
             setRecFlag(false);
             TransporterUsart<8>::open();

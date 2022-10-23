@@ -70,6 +70,9 @@ include_directories(Core/Inc
         Shark/IMU/driver/inc
         Shark/IMU/task/inc
         Shark/common_lib/communication
+        Shark/common_lib/controller
+        Shark/common_lib/encoder
+        Shark/common_lib/motor
         ################# !!! my cmakelist end   !!! ####################
         )
 
@@ -103,7 +106,6 @@ file(GLOB_RECURSE SOURCES
 
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F407IGHX_FLASH.ld
         ##################################
-
         )
 
 add_link_options(-Wl,-gc-sections,--print-memory-usage,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map)

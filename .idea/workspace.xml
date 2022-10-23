@@ -21,37 +21,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2bf75966-35a5-4cef-8d11-bcba66566fb3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Shark/common_lib/communication/com_vision.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Shark/common_lib/communication/com_vision.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Shark/common_lib/communication/fixed_packet.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Shark/common_lib/communication/transporter_can.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Shark/common_lib/communication/transporter_can.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Shark/common_lib/communication/transporter_interface.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Shark/common_lib/communication/transporter_usart.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shark/common_lib/controller/cascade_pid.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shark/common_lib/controller/cascade_pid.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shark/common_lib/controller/control_interface.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shark/common_lib/controller/general_pid.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shark/common_lib/controller/general_pid.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shark/common_lib/encoder/encoder.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shark/common_lib/encoder/encoder.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shark/common_lib/motor/motor.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shark/common_lib/motor/motor.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shark/common_lib/utilities/link_list.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Shark/common_lib/controller/cascade_pid.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Shark/common_lib/controller/general_pid.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Shark/common_lib/encoder/Encoder.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Shark/common_lib/motor/Motor.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/main.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/stm32f4xx_it.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/stm32f4xx_it.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/dma.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/dma.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/freertos.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/freertos.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/stm32f4xx_it.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/stm32f4xx_it.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/usart.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InfantryC.ioc" beforeDir="false" afterPath="$PROJECT_DIR$/InfantryC.ioc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shark/IMU/task/src/INS_task.c" beforeDir="false" afterPath="$PROJECT_DIR$/Shark/IMU/task/src/INS_task.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h" beforeDir="false" afterPath="$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_tim.h" beforeDir="false" afterPath="$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_tim.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c" beforeDir="false" afterPath="$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c" beforeDir="false" afterPath="$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shark/common_lib/communication/com_vision.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Shark/common_lib/communication/com_vision.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shark/common_lib/communication/com_vision.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Shark/common_lib/communication/com_vision.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shark/common_lib/communication/fixed_packet.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Shark/common_lib/communication/fixed_packet.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shark/my_main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Shark/my_main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-24aeec009877c4713a11.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2022-10-06T04-45-37-0808.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-InfantryC.elf-Debug-644ec2f174c5ad89c23c.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-cfd80e470e45181a48ce.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2022-10-10T13-50-35-0758.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-InfantryC.elf-Debug-020444dec8f9d7caee19.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.23.2/CMakeDetermineCompilerABI_C.bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.23.2/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.23.2/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.23.2/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Core/Src/dma.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Core/Src/dma.c.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Core/Src/freertos.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Core/Src/freertos.c.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Core/Src/stm32f4xx_it.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Core/Src/stm32f4xx_it.c.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Core/Src/usart.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Core/Src/usart.c.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Shark/IMU/task/src/INS_task.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Shark/IMU/task/src/INS_task.c.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Shark/common_lib/communication/com_vision.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Shark/common_lib/communication/com_vision.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Shark/common_lib/communication/transporter_can.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Shark/common_lib/communication/transporter_can.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Shark/my_main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Shark/my_main.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/InfantryC.bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/InfantryC.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/InfantryC.elf" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/InfantryC.elf" afterDir="false" />
@@ -113,11 +113,16 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "last_opened_file_path": "E:/AADataFile/RM/infantry/STM32F407IGH6TR_board",
-    "settings.editor.selected.configurable": "preferences.keymap",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "structure.view.defaults.are.configured": "true"
   }
 }]]></component>
   <component name="RunManager">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="InfantryC.elf" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" nameIsGenerated="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="InfantryC" TARGET_NAME="InfantryC.elf" CONFIG_NAME="Debug" version="1" RUN_TARGET_PROJECT_NAME="InfantryC" RUN_TARGET_NAME="InfantryC.elf">
       <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="E:\AADataFile\RM\infantry\InfantryC\config\daplink.cfg" reset-type="RUN" download-type="ALWAYS">
         <debugger kind="GDB" isBundled="true" />
@@ -148,7 +153,14 @@
       <workItem from="1665448781152" duration="12124000" />
       <workItem from="1665474403805" duration="213000" />
       <workItem from="1665474669274" duration="766000" />
-      <workItem from="1665494355292" duration="15502000" />
+      <workItem from="1665494355292" duration="40319000" />
+      <workItem from="1665670180160" duration="143000" />
+      <workItem from="1665674881879" duration="695000" />
+      <workItem from="1665816209025" duration="9486000" />
+      <workItem from="1665907526353" duration="114000" />
+      <workItem from="1666353787738" duration="6000" />
+      <workItem from="1666411963249" duration="38676000" />
+      <workItem from="1666515843182" duration="9019000" />
     </task>
     <servers />
   </component>

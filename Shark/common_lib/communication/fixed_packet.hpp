@@ -35,7 +35,8 @@ namespace communication {
             if(start < 0 || start > capacity-1){
                 return false;
             }else{
-                data = (uint16_t)((buffer_)[0] << 8 | (buffer_)[1]);
+                memcpy(&data, buffer_ + start, sizeof (data));
+//                data = (uint16_t)((buffer_)[0] << 8 | (buffer_)[1]);
                 return true;
             }
         }
