@@ -8,7 +8,7 @@ namespace controller {
         PID.ErrAllMax = errAllMax;
         PID.OutMax = outMax;
         PID.OutStep = outStep;
-        PID.RampTarget = rampTarStep;
+        PID.RampTartgetStep = rampTarStep;
         PID.State_RampOrNormal = state;
     }
 
@@ -23,6 +23,7 @@ namespace controller {
 
     void GeneralPID::ctrlLoop() {
         if(PID.Input!= nullptr){
+            //printf("loop\n");
             updateParam();
             calculate();
         }
@@ -40,10 +41,12 @@ namespace controller {
         }
         else if(PID.State_RampOrNormal == Ramp_e){
             PID.RampTarget = tar;
+            //printf("tar:%f\n",PID.RampTarget);
         }
     }
 
     void GeneralPID::setInputSrc(const float &src) {
+        //printf("set generalPID src\n");
         PID.Input = (float*)&src;
     }
 
@@ -79,7 +82,7 @@ namespace controller {
         }
         PID.Err_lastlast = PID.Err_last;
         PID.Err_last = PID.Err_now;
-        PID.Err_now = PID.Target - *PID.Input;
+        PID.Err_now = PID.Target - *(PID.Input);
 
         if( PID.Err_now < PID.Precision && PID.Err_now > -PID.Precision )
             PID.Err_now = 0;
@@ -121,7 +124,12 @@ namespace controller {
     const DebugParam &GeneralPID::getDebugParam() const {
         static DebugParam debug;
         debug.target_ = PID.Target;
-        debug.input_ = *PID.Input;
+        if(PID.Input != nullptr){
+            debug.input_ = *(PID.Input);
+        }
+        else {
+            debug.input_ = 0;
+        }
         debug.output_ = PID.Out;
         return debug;
     }
@@ -135,7 +143,7 @@ namespace controller {
     }
 
     void GeneralPID::setInputSrc(const float &src, whichPID which) {
-
+        //printf("no body\n");
     }
 
     void GeneralPID::setOutMaxAndStep(float outMax, float outStep, whichPID which) {

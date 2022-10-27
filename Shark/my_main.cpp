@@ -26,6 +26,8 @@
 #include "transporter_can.hpp"
 #include "encoder.hpp"
 #include "motor.hpp"
+#include "cascade_pid.hpp"
+#include "general_pid.hpp"
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -84,25 +86,21 @@ communication::TransporterCan can2(hcan2,communication::FIFO0_E);
 //motor::Motor yaw(motor::GM_YAW_E, motor::M6020_E,  motor::CAN1_E, motor::ONE_E, can1);
 //
 communication::ComVision vision(huart6);     /**1 创建通信类**/
+controller::GeneralPID vec1(1000,30000,3000,50,controller::Ramp_e);
+motor::Motor MotorArr[]{
+        {motor::GM_YAW_E, motor::M6020_E,  motor::CAN1_E, motor::ONE_E, can1, &vec1}  , //1ff
+        {motor::GM_PITCH_E, motor::M6020_E,  motor::CAN1_E, motor::TWO_E, can1} ,//1ff
+        {motor::GM_FRIC_0E, motor::M3508_E,  motor::CAN1_E, motor::THREE_E, can1},//200
+};
 
 extern "C" void StartDebugTask(void const * argument)
 {
-    motor::Motor MotorArr[]{
-            {motor::GM_YAW_E, motor::M6020_E,  motor::CAN1_E, motor::ONE_E, can1},
-            {motor::GM_PITCH_E, motor::M6020_E,  motor::CAN1_E, motor::TWO_E, can1},
-            {motor::GM_FRIC_0E, motor::M3508_E,  motor::CAN1_E, motor::THREE_E, can1},
-            {motor::GM_FRIC_1E, motor::M6020_E,  motor::CAN1_E, motor::FOUR_E, can1},
-            {motor::GM_RAMMER_E, motor::M2006_E,  motor::CAN1_E, motor::FIVE_E, can1}
-    };
-
-    /* USER CODE BEGIN StartDebugTask */
     osDelay(500);
-    vision.open();     /**2 启动底层的huart**/
-    can1.open();
-    can2.open();
-    uint32_t count = 0;
 
-    printf("vector:%d\n",motor::Motor::sendMsg_.size());
+    /**
+     * 这里是debug发送电流结构体设置的对不对
+     */
+//    printf("vector:%d\n",motor::Motor::sendMsg_.size());
 //    for(int i = 0 ; i < motor::Motor::sendMsg_.size();i++){
 //        printf("motor%d:%d,%lu,%d,%.2f\n",i,
 //               motor::Motor::sendMsg_[i].can,
@@ -110,26 +108,40 @@ extern "C" void StartDebugTask(void const * argument)
 //               motor::Motor::sendMsg_[i].id,
 //               *motor::Motor::sendMsg_[i].current );
 //    }
-    for(int i = 0 ; i < motor::Motor::sendMsg_.size();i++){
-        printf("motor%d:%d,%lu,%d,%.2f\n",i,
-               motor::Motor::sendMsg_[i].can,
-               motor::Motor::sendMsg_[i].stdId,
-               motor::Motor::sendMsg_[i].id,
-               *motor::Motor::sendMsg_[i].current );
-    }
 
+
+    /* USER CODE BEGIN StartDebugTask */
+
+    vision.open();     /**2 启动底层的huart**/
+    can1.open();
+    can2.open();
+    uint32_t count = 0;
+
+    uint8_t arr[8] = {5000 >> 8, 5000&0xff ,2000 >> 8, 2000&0xff ,3000 >> 8, 3000&0xff ,4000 >> 8, 4000&0xff  };
+
+    MotorArr[0].ctrl_->setTarget(100);
     for(;;){
         count++;
         if(count%500 == 0){
+            //printf("target:%.2f\n", MotorArr[0].ctrl_->getDebugParam().input_);
+//            printf("ecd:%.2f,%d,%d,%d\n",
+//                   MotorArr[0].encoder_.getEncoder().angelAll,
+//                   MotorArr[0].encoder_.getEncoder().speed,
+//                   MotorArr[0].encoder_.getEncoder().torque,
+//                   MotorArr[0].encoder_.getEncoder().tempature);
             LEDR_TOGGLE;
             count = 0;
         }
         else if(count % 10 == 0){
-//            printf("ecd:%.2f,%d,%d,%d\n",
-//                   yaw.encoder_.getEncoder().angelAll,
-//                   yaw.encoder_.getEncoder().speed,
-//                   yaw.encoder_.getEncoder().torque,
-//                   yaw.encoder_.getEncoder().tempature);
+//            printf("ecd:%.2f,%.2f,%.2f\n",MotorArr[0].ctrl_->getDebugParam().target_,
+//                   MotorArr[0].ctrl_->getDebugParam().input_,
+//                   MotorArr[0].ctrl_->getDebugParam().output_
+//                   );
+            MotorArr[0].ctrl_->ctrlLoop();
+            motor::Motor::sendAllMotorCur();
+//            can1.setTxStdID(0x1FF);
+//            memcpy((uint8_t*)can1.buf_tx_.getBufPtr(),arr,sizeof(arr));
+//            can1.write();
         }
         //
         osDelay(1);
@@ -151,6 +163,8 @@ extern "C" void USART6_IRQHandler(void)
 extern "C" void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan){
     can1.read();
     can2.read();
+    MotorArr[0].encoder_.encoderSloveLoop();
+
     //yaw.encoder_.encoderSloveLoop();
 //    /*!< CAN receive buffer */
 //    CAN_RxHeaderTypeDef rx_header;

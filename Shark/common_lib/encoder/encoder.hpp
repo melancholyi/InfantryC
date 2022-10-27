@@ -10,7 +10,7 @@ namespace motor {
         uint32_t stdId;
         float angelAll;
         float angel;
-        int16_t speed;
+        float speed;
         int16_t torque;
         uint8_t tempature;
     };
@@ -29,6 +29,9 @@ namespace motor {
             memset(&accum_angel_,0,sizeof (accum_angel_));
             stdID_ = 0;
         }
+        /**
+         * ????????
+         */
         void encoderSloveLoop();
 
         [[nodiscard]] const EncoderMsg &getEncoder() const {

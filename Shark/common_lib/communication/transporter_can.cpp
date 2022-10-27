@@ -57,7 +57,10 @@ namespace communication {
         return state;
     }
 
-
+    /**
+     * ????????
+     * @return
+     */
     bool TransporterCan::open() {
         filterInit();
         HAL_StatusTypeDef state;

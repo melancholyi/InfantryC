@@ -5,7 +5,7 @@ namespace motor {
     void Encoder::encoderSloveLoop() {
         if(can_->getRxStdID() == stdID_){
             encoder_.angel =  (float)(((float)getDJiMotorData(0)) * 360.0 / 8192.0);
-            encoder_.speed = getDJiMotorData(2);
+            encoder_.speed = (float)getDJiMotorData(2);
             encoder_.torque = getDJiMotorData(4);
             encoder_.tempature = can_->buf_rx_.getBufPtr()[6];
             allAngelRecoderLoop();
