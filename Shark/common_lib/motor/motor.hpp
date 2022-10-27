@@ -17,7 +17,7 @@ namespace privateNS{
     };
     struct sBuffer{
         uint32_t stdId ;
-        uint8_t buffer[8] ;
+        uint8_t buffer[8]{} ;
         sBuffer(){
             stdId = 0;
             memset(buffer,0, sizeof(buffer));
@@ -49,6 +49,7 @@ namespace motor {
         M2006_E = 1,
         M6020_E = 2
     };
+    /** 自定义 **/
     enum eMotorApp{
         GM_YAW_E = 0,
         GM_PITCH_E = 1,
@@ -78,39 +79,37 @@ namespace motor {
         SEVEN_E = 7,
         EIGHT_E = 8
     };
-    enum eCtrlWay{
-        VC_E = 0,
-        PC_E = 1,
-        NO_E = 2
-    };
+
+    /** 发送数据结构体,保存发送电流时需要的信息 **/
     struct sCanSendMsg{
-        eCanX can;
-        uint32_t stdId;
-        privateNS::eBuferIndex index1; //六种发送组合类型的index
-        uint8_t index2; //同组中的index2
-        uint8_t id;
-        uint8_t begin;//int16_t类型电流在uint8_t arr[8]中放置的位置起始位置
-        float *current;
+        eCanX can; //can
+        uint32_t stdId;     /** 发送的 stdid **/
+        privateNS::eBuferIndex index; /** 六种发送组合类型的index **/
+        uint8_t id;         //// 设置的电机ID
+        uint8_t begin;      //// int16_t类型电流在uint8_t arr[8]中放置的位置起始位置
+        float *current;     //// 指向电流地址的指针，可以通过  &current  绑定地址
         sCanSendMsg(eCanX can, uint32_t stdId, uint16_t id, const float &current = 0 ) : can(can), stdId(stdId), id(id),
                                                                                            current((float*)&current) {
+            /** 通过id计算应该在buffer[8] 的数据 **/
             begin = (2*((id-1)%4));
-            index2 = 0;
+
+            /** 设置index **/
             if(can == CAN1_E){
                 if(stdId == 0x200){
-                    index1 = privateNS::CAN1_0x200_I0;
+                    index = privateNS::CAN1_0x200_I0;
                 }else if(stdId == 0x1FF){
-                    index1 = privateNS::CAN1_0x1FF_I2;
+                    index = privateNS::CAN1_0x1FF_I2;
                 }else if(stdId == 0x2FF){
-                    index1 = privateNS::CAN1_0x2FF_I4;
+                    index = privateNS::CAN1_0x2FF_I4;
                 }
             }
             else if(can == CAN2_E){
                 if(stdId == 0x200){
-                    index1 = privateNS::CAN2_0x200_I1;
+                    index = privateNS::CAN2_0x200_I1;
                 }else if(stdId == 0x1FF){
-                    index1 = privateNS::CAN2_0x1FF_I3;
+                    index = privateNS::CAN2_0x1FF_I3;
                 }else if(stdId == 0x2FF){
-                    index1 = privateNS::CAN2_0x2FF_I5;
+                    index = privateNS::CAN2_0x2FF_I5;
                 }
             }
         }
@@ -128,52 +127,80 @@ namespace motor {
          * @param can   ?: encoder can
          * @param ctrlPtr ?: ctrl ptr interface
          */
-        Motor(eMotorApp app, eMotorType type, eCanX canx, eCANID id,//normal msg
-              communication::TransporterCan& can,//encoder can
-              controller::ControlInterface *ctrlPtr = nullptr )://ptr interface
+        Motor(eMotorApp app, eMotorType type, eCanX canx, eCANID id,//// normal msg
+              communication::TransporterCan& can,//// encoder can
+              controller::ControlInterface *ctrlPtr = nullptr )://// ptr interface
+                    ///这用到了cpp多态的思想，来把双环和单环封装在一个类
               /** init list: ??**/
                     app_(app),type_(type),can_(canx),id_(id),
                     encoder_(can),
                     ctrl_(ctrlPtr){
             /** constructor function body:?? **/
             sloveID();
-            encoder_.setStdId(recID_);
+            encoder_.setStdId(recID_);     /** 设置电调反馈的stdid,用来编码 **/
             direct_cur_ = 0.0;
 
+            /** 判断是否配置错误 **/
             for(sCanSendMsg msg : sendMsg_){
+                /** can相同 stdid相同 摆放的位置也相同,协议上冲突 **/
                 if(msg.stdId == sendID_ && msg.can == can_ && msg.begin == (2*((id-1)%4))){
                     config_error  = true;
                     break;
                 }
             }
-            if(ctrl_ != nullptr){
-                //printf("set input src\n");
-                ctrl_->setInputSrc(encoder_.getEncoder().angelAll,controller::POS_E);
-                ctrl_->setInputSrc(encoder_.getEncoder().speed,controller::VEC_E);
-                ctrl_->setInputSrc(encoder_.getEncoder().speed);
-                sCanSendMsg temp(can_, sendID_, id_, ctrl_->getCurrentOut());
-                sendMsg_.push_back(temp);
-            }
-            else{
-                //printf("input src null\n");
-                sCanSendMsg temp(can_, sendID_, id_, direct_cur_);
-                sendMsg_.push_back(temp);
-            }
-            if(ptrCan1_ == nullptr && can_ == CAN1_E){
-                ptrCan1_ = &can;
-            }
-            else if(ptrCan1_ == nullptr && can_ == CAN2_E){
-                ptrCan2_ = &can;
+            /** 没有出错，才把这个电机放入电流发送的vector中 **/
+            if(!config_error){
+                if(ctrl_ != nullptr){
+                    /** 绑定PID控制类的输入来源，默认使用电机编码数据 **/
+                    /** 双环时候生效 **/
+                    ctrl_->setInputSrc(encoder_.getEncoder().angelAll,controller::POS_E);
+                    ctrl_->setInputSrc(encoder_.getEncoder().speed,controller::VEC_E);
+
+                    /** 速度环环时候生效 **/
+                    ctrl_->setInputSrc(encoder_.getEncoder().speed);
+
+                    /** 将电机需要通过can发送的信息保存到static vector var中 **/
+                    sCanSendMsg temp(can_, sendID_, id_, ctrl_->getCurrentOut());
+                    sendMsg_.push_back(temp);
+
+                    //动态分配空间 电流发送的buffer
+                    ptrCurrents[temp.index] = new privateNS::sBuffer;
+                }
+
+                else{ //// 没控制，则把直接设置的电流值地址绑定为发送来源
+                    sCanSendMsg temp(can_, sendID_, id_, direct_cur_);
+                    sendMsg_.push_back(temp);
+
+                    //// 动态分配空间 电流发送的buffer
+                    ptrCurrents[temp.index] = new privateNS::sBuffer;
+                }
+
+                //// 绑定发送电流的can  指针指向transporter_can类地址
+                if(ptrCan1_ == nullptr && can_ == CAN1_E){
+                    ptrCan1_ = &can;
+                }
+                else if(ptrCan1_ == nullptr && can_ == CAN2_E){
+                    ptrCan2_ = &can;
+                }
             }
         }
 
+        /**
+         * Motor 析构函数
+         */
         virtual ~Motor();
 
+        /**
+         * 静态函数，发送所有实例化对象的电流
+         */
         static void sendAllMotorCur();
 
 
 
-
+        /**
+         * 直接设置电机输出的电流
+         * @param directCur : 电流值
+         */
         [[maybe_unused]] void setDirectCur(float directCur);
 
 
@@ -182,6 +209,12 @@ namespace motor {
     private:
 
         void sloveID();
+        inline float limltCur(float cur){
+            float input = cur;
+            if(input > (float)maxCur_) input = (float)maxCur_ - 500;
+            else if(input < -(float)maxCur_) input = -((float)maxCur_ - 500);
+            return input;
+        };
 
     /** public member variable **/
     public:
@@ -201,10 +234,8 @@ namespace motor {
 
         static communication::TransporterCan* ptrCan1_;
         static communication::TransporterCan* ptrCan2_;
-        // 记录所有点击需要发送的目的地和电流信息
+        //// 记录所有点击需要发送的目的地和电流信息
         static privateNS::sBuffer *ptrCurrents[6]; //六种类型的指针
-        static bool flag_;
-        static uint8_t group[6];
         static bool config_error;
     };
 

@@ -31,19 +31,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 121,
+				"line" : 122,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
 				"line" : 30,
-				"parent" : 0
-			},
-			{
-				"command" : 1,
-				"file" : 0,
-				"line" : 111,
 				"parent" : 0
 			},
 			{
@@ -59,21 +53,27 @@
 				"parent" : 0
 			},
 			{
-				"command" : 2,
+				"command" : 1,
 				"file" : 0,
-				"line" : 116,
+				"line" : 114,
 				"parent" : 0
 			},
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 118,
+				"line" : 117,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 119,
 				"parent" : 0
 			},
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 125,
+				"line" : 126,
 				"parent" : 0
 			},
 			{
@@ -115,7 +115,7 @@
 			{
 				"command" : 6,
 				"file" : 0,
-				"line" : 81,
+				"line" : 82,
 				"parent" : 0
 			},
 			{
@@ -290,6 +290,10 @@
 				{
 					"backtrace" : 16,
 					"path" : "E:/AADataFile/RM/infantry/InfantryC/Shark/common_lib/motor"
+				},
+				{
+					"backtrace" : 16,
+					"path" : "E:/AADataFile/RM/infantry/InfantryC/Shark/App/vision"
 				}
 			],
 			"language" : "C",
@@ -347,22 +351,22 @@
 				137,
 				138,
 				139,
-				149,
-				150,
-				156,
-				157,
+				151,
+				152,
 				158,
 				159,
 				160,
-				167,
-				168,
+				161,
+				162,
 				169,
 				170,
 				171,
-				176,
-				177,
+				172,
+				173,
 				178,
-				197
+				179,
+				180,
+				199
 			]
 		},
 		{
@@ -532,6 +536,10 @@
 				{
 					"backtrace" : 16,
 					"path" : "E:/AADataFile/RM/infantry/InfantryC/Shark/common_lib/motor"
+				},
+				{
+					"backtrace" : 16,
+					"path" : "E:/AADataFile/RM/infantry/InfantryC/Shark/App/vision"
 				}
 			],
 			"language" : "ASM",
@@ -702,6 +710,10 @@
 				{
 					"backtrace" : 16,
 					"path" : "E:/AADataFile/RM/infantry/InfantryC/Shark/common_lib/motor"
+				},
+				{
+					"backtrace" : 16,
+					"path" : "E:/AADataFile/RM/infantry/InfantryC/Shark/App/vision"
 				}
 			],
 			"language" : "CXX",
@@ -715,13 +727,14 @@
 			},
 			"sourceIndexes" : 
 			[
-				179,
-				182,
-				186,
-				189,
+				140,
+				181,
+				184,
+				188,
 				191,
 				193,
-				196
+				195,
+				198
 			]
 		}
 	],
@@ -905,7 +918,6 @@
 				130,
 				131,
 				134,
-				140,
 				141,
 				142,
 				143,
@@ -913,33 +925,35 @@
 				145,
 				146,
 				147,
-				151,
-				152,
+				148,
+				149,
 				153,
 				154,
 				155,
-				161,
-				162,
+				156,
+				157,
 				163,
 				164,
 				165,
 				166,
-				172,
-				173,
+				167,
+				168,
 				174,
 				175,
-				180,
-				181,
+				176,
+				177,
+				182,
 				183,
-				184,
 				185,
+				186,
 				187,
-				188,
+				189,
 				190,
 				192,
 				194,
-				195,
-				198
+				196,
+				197,
+				200
 			]
 		},
 		{
@@ -990,29 +1004,30 @@
 				137,
 				138,
 				139,
-				149,
-				150,
-				156,
-				157,
+				140,
+				151,
+				152,
 				158,
 				159,
 				160,
-				167,
-				168,
+				161,
+				162,
 				169,
 				170,
 				171,
-				176,
-				177,
+				172,
+				173,
 				178,
 				179,
-				182,
-				186,
-				189,
+				180,
+				181,
+				184,
+				188,
 				191,
 				193,
-				196,
-				197
+				195,
+				198,
+				199
 			]
 		},
 		{
@@ -1024,8 +1039,8 @@
 				51,
 				87,
 				109,
-				148,
-				199
+				150,
+				201
 			]
 		}
 	],
@@ -1778,6 +1793,17 @@
 		},
 		{
 			"backtrace" : 1,
+			"compileGroupIndex" : 2,
+			"path" : "Shark/App/vision/com_vision.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Shark/App/vision/com_vision.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
 			"path" : "Shark/IMU/AHRS/Include/arm_common_tables.h",
 			"sourceGroupIndex" : 0
 		},
@@ -1989,12 +2015,12 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 2,
-			"path" : "Shark/common_lib/communication/com_vision.cpp",
+			"path" : "Shark/common_lib/code_specification.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Shark/common_lib/communication/com_vision.hpp",
+			"path" : "Shark/common_lib/code_specification.hpp",
 			"sourceGroupIndex" : 0
 		},
 		{

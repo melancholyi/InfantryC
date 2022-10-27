@@ -41,6 +41,7 @@ void * operator new(size_t size)
     memset(ptr,0,size);
     return ptr;
 }
+
 void operator delete(void *m)
 {
     vPortFree(m);
@@ -87,8 +88,9 @@ communication::TransporterCan can2(hcan2,communication::FIFO0_E);
 //
 communication::ComVision vision(huart6);     /**1 创建通信类**/
 controller::GeneralPID vec1(1000,30000,3000,50,controller::Ramp_e);
+controller::CascadePID pos1(100,100,50,1000,30000,3000);
 motor::Motor MotorArr[]{
-        {motor::GM_YAW_E, motor::M6020_E,  motor::CAN1_E, motor::ONE_E, can1, &vec1}  , //1ff
+        {motor::GM_YAW_E, motor::M6020_E,  motor::CAN1_E, motor::ONE_E, can1, &pos1}  , //1ff
         {motor::GM_PITCH_E, motor::M6020_E,  motor::CAN1_E, motor::TWO_E, can1} ,//1ff
         {motor::GM_FRIC_0E, motor::M3508_E,  motor::CAN1_E, motor::THREE_E, can1},//200
 };
@@ -96,7 +98,6 @@ motor::Motor MotorArr[]{
 extern "C" void StartDebugTask(void const * argument)
 {
     osDelay(500);
-
     /**
      * 这里是debug发送电流结构体设置的对不对
      */
@@ -109,7 +110,6 @@ extern "C" void StartDebugTask(void const * argument)
 //               *motor::Motor::sendMsg_[i].current );
 //    }
 
-
     /* USER CODE BEGIN StartDebugTask */
 
     vision.open();     /**2 启动底层的huart**/
@@ -119,7 +119,9 @@ extern "C" void StartDebugTask(void const * argument)
 
     uint8_t arr[8] = {5000 >> 8, 5000&0xff ,2000 >> 8, 2000&0xff ,3000 >> 8, 3000&0xff ,4000 >> 8, 4000&0xff  };
 
-    MotorArr[0].ctrl_->setTarget(100);
+    MotorArr[0].ctrl_->setTarget(360.0 * 3,controller::POS_E);
+    MotorArr[0].ctrl_->setPID(2,0,0,controller::POS_E);
+    MotorArr[0].ctrl_->setPID(70,6.5,0,controller::VEC_E);
     for(;;){
         count++;
         if(count%500 == 0){
@@ -133,17 +135,18 @@ extern "C" void StartDebugTask(void const * argument)
             count = 0;
         }
         else if(count % 10 == 0){
-//            printf("ecd:%.2f,%.2f,%.2f\n",MotorArr[0].ctrl_->getDebugParam().target_,
-//                   MotorArr[0].ctrl_->getDebugParam().input_,
-//                   MotorArr[0].ctrl_->getDebugParam().output_
-//                   );
-            MotorArr[0].ctrl_->ctrlLoop();
-            motor::Motor::sendAllMotorCur();
+
+            printf("ecd:%.2f,%.2f,%.2f\n",MotorArr[0].ctrl_->getDebugParam(controller::POS_E).target_,
+                   MotorArr[0].ctrl_->getDebugParam(controller::POS_E).input_,
+                   MotorArr[0].ctrl_->getDebugParam(controller::POS_E).output_
+            );
+
 //            can1.setTxStdID(0x1FF);
 //            memcpy((uint8_t*)can1.buf_tx_.getBufPtr(),arr,sizeof(arr));
 //            can1.write();
         }
-        //
+        MotorArr[0].ctrl_->ctrlLoop();
+        motor::Motor::sendAllMotorCur();
         osDelay(1);
     }
     /* USER CODE END StartDebugTask */

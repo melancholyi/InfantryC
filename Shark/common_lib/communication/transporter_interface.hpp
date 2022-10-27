@@ -2,6 +2,9 @@
 #define INFANTRYC_TRANSPORTER_INTERFACE_HPP
 #include <cstdint>
 namespace communication{
+    /**
+     * 虚基类 描述了通信类一般的操作函数
+     */
     class TransportInterface{
     public:
         virtual bool open() = 0;

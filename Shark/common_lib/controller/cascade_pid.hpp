@@ -27,7 +27,7 @@ namespace controller {
 
         void setOutMaxAndStep(float outMax, float outStep) override;
 
-        const DebugParam &getDebugParam() const override;
+        [[nodiscard]] const DebugParam &getDebugParam() const override;
         /** member varible **/
     public:
 

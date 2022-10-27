@@ -1,9 +1,17 @@
 #include "encoder.hpp"
 
 namespace motor {
-
+/**
+ * encoderLoop放在can中断中
+ */
     void Encoder::encoderSloveLoop() {
+        times_ ++;
+        if(times_>1000){ //1000次没有收到，就设置为false 表示电机离线
+            encoder_.isConnect = false;
+        }
         if(can_->getRxStdID() == stdID_){
+            encoder_.isConnect = true;
+            times_ = 0; //discount flag
             encoder_.angel =  (float)(((float)getDJiMotorData(0)) * 360.0 / 8192.0);
             encoder_.speed = (float)getDJiMotorData(2);
             encoder_.torque = getDJiMotorData(4);
