@@ -21,28 +21,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2bf75966-35a5-4cef-8d11-bcba66566fb3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Shark/common_lib/code_specification.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Shark/common_lib/code_specification.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shark/common_lib/common_lib.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shark/common_lib/communication/com_vision.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Shark/App/vision/com_vision.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shark/common_lib/communication/com_vision.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Shark/App/vision/com_vision.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shark/common_lib/communication/transporter_interface.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Shark/common_lib/communication/transporter_interface.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shark/common_lib/communication/transporter_usart.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Shark/common_lib/communication/transporter_usart.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shark/common_lib/controller/cascade_pid.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Shark/common_lib/controller/cascade_pid.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shark/common_lib/encoder/encoder.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Shark/common_lib/encoder/encoder.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shark/common_lib/encoder/encoder.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Shark/common_lib/encoder/encoder.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shark/common_lib/motor/motor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Shark/common_lib/motor/motor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shark/common_lib/communication/transporter_can.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Shark/common_lib/communication/transporter_can.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shark/common_lib/controller/general_pid.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Shark/common_lib/controller/general_pid.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shark/common_lib/motor/motor.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Shark/common_lib/motor/motor.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shark/my_main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Shark/my_main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-2355080844c914c91f35.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2022-10-23T07-34-49-0919.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-InfantryC.elf-Debug-05161fed31b5c37d5d85.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-742fd9da334804fbd431.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2022-10-27T15-09-18-0574.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-InfantryC.elf-Debug-fd762ebe00d56d0af064.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Shark/common_lib/communication/com_vision.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Shark/common_lib/communication/com_vision.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Shark/common_lib/communication/transporter_can.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Shark/common_lib/communication/transporter_can.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Shark/common_lib/encoder/Encoder.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Shark/common_lib/encoder/Encoder.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Shark/common_lib/motor/Motor.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Shark/common_lib/motor/Motor.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Shark/my_main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InfantryC.elf.dir/Shark/my_main.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/InfantryC.bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/InfantryC.bin" afterDir="false" />
@@ -95,21 +86,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "last_opened_file_path": "E:/AADataFile/RM/infantry/InfantryC/Shark/App",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Rainbow Brackets",
-    "structure.view.defaults.are.configured": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/AADataFile/RM/infantry/InfantryC/Shark/App&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Rainbow Brackets&quot;,
+    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\AADataFile\RM\infantry\InfantryC\Shark\App" />
@@ -172,6 +163,9 @@
       <workItem from="1666858372378" duration="512000" />
       <workItem from="1666870936605" duration="4549000" />
       <workItem from="1666881467862" duration="1778000" />
+      <workItem from="1666930105944" duration="5000" />
+      <workItem from="1666930245267" duration="1780000" />
+      <workItem from="1667032736300" duration="5823000" />
     </task>
     <servers />
   </component>

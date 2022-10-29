@@ -16,6 +16,11 @@ namespace communication {
     class TransporterCan : public TransportInterface{
     public:
         /********** constructor **********/
+        /**
+         *
+         * @param hcan
+         * @param fifo
+         */
         explicit TransporterCan(CAN_HandleTypeDef &hcan,CanRxFIFOx fifo) : buf_tx_(),buf_rx_(),hcan_(&hcan),fifo_(fifo){
             memset(&rx_header_,0,sizeof (rx_header_));
             memset(&tx_header_,0,sizeof (tx_header_));

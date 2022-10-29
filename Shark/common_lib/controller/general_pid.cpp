@@ -2,6 +2,14 @@
 
 namespace controller {
 
+    /**
+     * 
+     * @param errAllMax
+     * @param outMax
+     * @param outStep
+     * @param rampTarStep
+     * @param state
+     */
     GeneralPID::GeneralPID(float errAllMax, float outMax, float outStep, float rampTarStep, ePID_RampState state) {
         memset(&PID, 0, sizeof (PID));
         PID.Input = nullptr;

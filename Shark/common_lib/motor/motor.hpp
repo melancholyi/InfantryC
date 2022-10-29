@@ -205,7 +205,7 @@ namespace motor {
 
 
         /** private function **/
-        static std::vector<sCanSendMsg> sendMsg_;
+
     private:
 
         void sloveID();
@@ -237,6 +237,7 @@ namespace motor {
         //// 记录所有点击需要发送的目的地和电流信息
         static privateNS::sBuffer *ptrCurrents[6]; //六种类型的指针
         static bool config_error;
+        static std::vector<sCanSendMsg> sendMsg_;
     };
 
 } // controller
