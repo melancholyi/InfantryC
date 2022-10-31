@@ -35,17 +35,7 @@
 /* Private function prototypes -----------------------------------------------*/
 
 /* Private user code ---------------------------------------------------------*/
-void * operator new(size_t size)
-{
-    auto ptr = pvPortMalloc(size);
-    memset(ptr,0,size);
-    return ptr;
-}
 
-void operator delete(void *m)
-{
-    vPortFree(m);
-}
 
 /**
   * @brief  The application entry point.
@@ -82,64 +72,76 @@ int main()
     }
 }
 
-communication::TransporterCan can1(hcan1,communication::FIFO0_E);
-communication::TransporterCan can2(hcan2,communication::FIFO0_E);
-communication::ComVision vision(huart6);     /**1 创建通信类**/
-controller::GeneralPID vec1(1000,30000,3000,50,controller::Ramp_e);
-controller::CascadePID pos1(100,100,50,1000,30000,3000);
-motor::Motor MotorArr[]{
-        {motor::GM_YAW_E, motor::M6020_E,  motor::CAN1_E, motor::ONE_E, can1, &pos1}  , //1ff
-        {motor::GM_PITCH_E, motor::M6020_E,  motor::CAN1_E, motor::TWO_E, can1} ,//1ff
-        {motor::GM_FRIC_0E, motor::M3508_E,  motor::CAN1_E, motor::THREE_E, can1},//200
-};
+/*******!!!!!!!!!!!!!!!!!!!!!
+代码放在以下这个地方就可以正常 push——back
+!!!!!!!!!!!!!!!!!!*/
+//communication::TransporterCan can1(hcan1,communication::FIFO0_E);
+//communication::TransporterCan can2(hcan2,communication::FIFO0_E);
+//controller::GeneralPID vec1(1000,30000,3000,50,controller::Ramp_e);
+//controller::CascadePID pos1(100,100,50,1000,30000,3000);
+//motor::Motor MotorArr[]{
+//        {motor::GM_YAW_E, motor::M6020_E,  motor::CAN1_E, motor::ONE_E, can1}  , //1ff
+//        {motor::GM_PITCH_E, motor::M6020_E,  motor::CAN1_E, motor::TWO_E, can1} ,//1ff
+//        {motor::GM_FRIC_0E, motor::M3508_E,  motor::CAN1_E, motor::THREE_E, can1},//200
+//};
+//
+//extern "C" void StartDebugTask(void const * argument)
+//{
+//    osDelay(500);
+//
+//    /* USER CODE BEGIN StartDebugTask */
+//    can1.open();
+//    can2.open();
+//    uint32_t count = 0;
+////    MotorArr[0].ctrl_->setTarget(360.0 * 3,controller::POS_E);
+////    MotorArr[0].ctrl_->setPID(2,0,0,controller::POS_E);
+////    MotorArr[0].ctrl_->setPID(70,6.5,0,controller::VEC_E);
+//    MotorArr[0].setDirectCur(5000);
+//    for(int i = 0 ;i<6;i++){
+//        if(MotorArr[0].ptrCurrents[i] != nullptr){
+//            printf("index:%d\n",i);
+//        }
+//    }
+//    printf("size:%d\n",MotorArr[0].sendMsg_.size());
+//
+//    for(;;){
+//        count++;
+//        if(count%500 == 0){
+//            LEDR_TOGGLE;
+//            count = 0;
+//        }
+//        else if(count % 10 == 0){
+//            ////debug
+////            printf("ecd:%.2f,%.2f,%.2f\n",MotorArr[0].ctrl_->getDebugParam(controller::POS_E).target_,
+////                   MotorArr[0].ctrl_->getDebugParam(controller::POS_E).input_,
+////                   MotorArr[0].ctrl_->getDebugParam(controller::POS_E).output_
+////            );
+//        }
+//        //MotorArr[0].ctrl_->ctrlLoop();
+//
+//        motor::Motor::sendAllMotorCur();
+//        osDelay(1);
+//    }
+//    /* USER CODE END StartDebugTask */
+//}
+//extern "C" void USART6_IRQHandler(void)
+//{
+//    /* USER CODE BEGIN USART6_IRQn 0 */
+//
+//    /* USER CODE END USART6_IRQn 0 */
+//    HAL_UART_IRQHandler(&huart6);
+//    /* USER CODE BEGIN USART6_IRQn 1 */
+//
+//    /* USER CODE END USART6_IRQn 1 */
+//}
+//
+//extern "C" void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan){
+//    can1.read();
+//    can2.read();
+//    //MotorArr[0].encoder_.encoderSloveLoop();
+//}
 
-extern "C" void StartDebugTask(void const * argument)
-{
-    osDelay(500);
-    /* USER CODE BEGIN StartDebugTask */
-    vision.open();
-    can1.open();
-    can2.open();
-    uint32_t count = 0;
-    MotorArr[0].ctrl_->setTarget(360.0 * 3,controller::POS_E);
-    MotorArr[0].ctrl_->setPID(2,0,0,controller::POS_E);
-    MotorArr[0].ctrl_->setPID(70,6.5,0,controller::VEC_E);
-    for(;;){
-        count++;
-        if(count%500 == 0){
-            LEDR_TOGGLE;
-            count = 0;
-        }
-        else if(count % 10 == 0){
-            ////debug
-            printf("ecd:%.2f,%.2f,%.2f\n",MotorArr[0].ctrl_->getDebugParam(controller::POS_E).target_,
-                   MotorArr[0].ctrl_->getDebugParam(controller::POS_E).input_,
-                   MotorArr[0].ctrl_->getDebugParam(controller::POS_E).output_
-            );
-        }
-        MotorArr[0].ctrl_->ctrlLoop();
 
-        motor::Motor::sendAllMotorCur();
-        osDelay(1);
-    }
-    /* USER CODE END StartDebugTask */
-}
-extern "C" void USART6_IRQHandler(void)
-{
-    /* USER CODE BEGIN USART6_IRQn 0 */
-    vision.read();
-    vision.slovePacket();
-    /* USER CODE END USART6_IRQn 0 */
-   HAL_UART_IRQHandler(&huart6);
-    /* USER CODE BEGIN USART6_IRQn 1 */
 
-    /* USER CODE END USART6_IRQn 1 */
-}
-
-extern "C" void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan){
-    can1.read();
-    can2.read();
-    MotorArr[0].encoder_.encoderSloveLoop();
-}
 
 

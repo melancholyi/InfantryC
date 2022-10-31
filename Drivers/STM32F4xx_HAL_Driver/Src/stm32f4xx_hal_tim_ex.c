@@ -178,7 +178,7 @@ HAL_StatusTypeDef HAL_TIMEx_HallSensor_Init(TIM_HandleTypeDef *htim, TIM_HallSen
   /* Set the TIM state */
   htim->State = HAL_TIM_STATE_BUSY;
 
-  /* Configure the Time base in the encoder Mode */
+  /* Configure the Time base in the Encoder Mode */
   TIM_Base_SetConfig(htim->Instance, &htim->Init);
 
   /* Configure the Channel 1 as Input Channel to interface with the three Outputs of the  Hall sensor */

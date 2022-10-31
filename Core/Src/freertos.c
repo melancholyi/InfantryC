@@ -54,6 +54,7 @@ osThreadId CanComTaskHandle;
 osThreadId LegTaskHandle;
 osThreadId WheelTaskHandle;
 osThreadId BehaviorTaskHandle;
+osThreadId GimbalTaskHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -66,6 +67,7 @@ void StartCanComTask(void const * argument);
 void StartLegTask(void const * argument);
 void StartWheelTask(void const * argument);
 void StartBehaviorTask(void const * argument);
+void StartGimbalTask(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -135,6 +137,10 @@ void MX_FREERTOS_Init(void) {
   /* definition and creation of BehaviorTask */
   osThreadDef(BehaviorTask, StartBehaviorTask, osPriorityHigh, 0, 256);
   BehaviorTaskHandle = osThreadCreate(osThread(BehaviorTask), NULL);
+
+  /* definition and creation of GimbalTask */
+  osThreadDef(GimbalTask, StartGimbalTask, osPriorityHigh, 0, 512);
+  GimbalTaskHandle = osThreadCreate(osThread(GimbalTask), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -250,6 +256,24 @@ __weak void StartBehaviorTask(void const * argument)
     osDelay(1);
   }
   /* USER CODE END StartBehaviorTask */
+}
+
+/* USER CODE BEGIN Header_StartGimbalTask */
+/**
+* @brief Function implementing the GimbalTask thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartGimbalTask */
+__weak void StartGimbalTask(void const * argument)
+{
+  /* USER CODE BEGIN StartGimbalTask */
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1);
+  }
+  /* USER CODE END StartGimbalTask */
 }
 
 /* Private application code --------------------------------------------------*/

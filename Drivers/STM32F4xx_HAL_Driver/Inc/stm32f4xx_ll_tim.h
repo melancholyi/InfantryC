@@ -312,7 +312,7 @@ typedef struct
 
 
 /**
-  * @brief  TIM encoder interface configuration structure definition.
+  * @brief  TIM Encoder interface configuration structure definition.
   */
 typedef struct
 {
@@ -742,7 +742,7 @@ typedef struct
   * @}
   */
 
-/** @defgroup TIM_LL_EC_ENCODERMODE encoder Mode
+/** @defgroup TIM_LL_EC_ENCODERMODE Encoder Mode
   * @{
   */
 #define LL_TIM_ENCODERMODE_X2_TI1                     TIM_SMCR_SMS_0                                                     /*!< Quadrature encoder mode 1, x2 mode - Counter counts up/down on TI1FP1 edge depending on TI2FP2 level */

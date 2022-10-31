@@ -5,6 +5,7 @@
   - clion
   - arm-none-eabi-gcc
   - openocd
+  - c++语言
 #
 # 2 common-lib树状图
 ```
@@ -51,7 +52,7 @@ CmakeList添加一下头文件
 #include "motor.hpp"
 //encoder我集成到motor类中了，无需考虑包含头文件
 ```
-### 3.重载operator  
+### 3.重载operator    
 ```cpp
 ////这两个函数定义到main.cpp中(必须配置Freertos,我用的CMSIS-V1)
 void * operator new(size_t size)
@@ -73,7 +74,7 @@ void operator delete(void *m)
 ### 3.2.1 开环控制  
 #### 1.包含头文件
 ```cpp
-#include "tranporter_can.hpp"
+#include "transporter_can.hpp"
 #include "motor.hpp"
 ```
 #### 2.实例化can通信对象
@@ -219,9 +220,9 @@ void main(){
     if(count % 10 == 0){
       count = 0;
           ////debug
-          printf("A:%.2f,%.2f,%.2f\n",yaw.ctrl_->getDebugPara().target_,
-                 yaw.ctrl_->getDebugPara().input_,
-                 yaw.ctrl_->getDebugPara().output_
+          printf("A:%.2f,%.2f,%.2f\n",yaw.ctrl_->getDebugParam().target_,
+                 yaw.ctrl_->getDebugParam().input_,
+                 yaw.ctrl_->getDebugParam().output_
           );
     }
     yaw.ctrl_->ctrlLoop();

@@ -22,10 +22,10 @@
   *           + TIM One Pulse Initialization
   *           + TIM One Pulse Channel Configuration
   *           + TIM One Pulse Start
-  *           + TIM encoder Interface Initialization
-  *           + TIM encoder Interface Start
-  *           + TIM encoder Interface Start Interruption
-  *           + TIM encoder Interface Start DMA
+  *           + TIM Encoder Interface Initialization
+  *           + TIM Encoder Interface Start
+  *           + TIM Encoder Interface Start Interruption
+  *           + TIM Encoder Interface Start DMA
   *           + Commutation Event configuration with Interruption and DMA
   *           + TIM OCRef clear configuration
   *           + TIM External Clock configuration
@@ -67,7 +67,7 @@
            (++) Output Compare : HAL_TIM_OC_MspInit()
            (++) PWM generation : HAL_TIM_PWM_MspInit()
            (++) One-pulse mode output : HAL_TIM_OnePulse_MspInit()
-           (++) encoder mode output : HAL_TIM_Encoder_MspInit()
+           (++) Encoder mode output : HAL_TIM_Encoder_MspInit()
 
      (#) Initialize the TIM low level resources :
         (##) Enable the TIM interface clock using __HAL_RCC_TIMx_CLK_ENABLE();
@@ -92,7 +92,7 @@
             external signal.
        (++) HAL_TIM_OnePulse_Init and HAL_TIM_OnePulse_ConfigChannel: to use the Timer
             in One Pulse Mode.
-       (++) HAL_TIM_Encoder_Init: to use the Timer encoder Interface.
+       (++) HAL_TIM_Encoder_Init: to use the Timer Encoder Interface.
 
      (#) Activate the TIM peripheral using one of the start functions depending from the feature used:
            (++) Time Base : HAL_TIM_Base_Start(), HAL_TIM_Base_Start_DMA(), HAL_TIM_Base_Start_IT()
@@ -100,7 +100,7 @@
            (++) Output Compare : HAL_TIM_OC_Start(), HAL_TIM_OC_Start_DMA(), HAL_TIM_OC_Start_IT()
            (++) PWM generation : HAL_TIM_PWM_Start(), HAL_TIM_PWM_Start_DMA(), HAL_TIM_PWM_Start_IT()
            (++) One-pulse mode output : HAL_TIM_OnePulse_Start(), HAL_TIM_OnePulse_Start_IT()
-           (++) encoder mode output : HAL_TIM_Encoder_Start(), HAL_TIM_Encoder_Start_DMA(), HAL_TIM_Encoder_Start_IT().
+           (++) Encoder mode output : HAL_TIM_Encoder_Start(), HAL_TIM_Encoder_Start_DMA(), HAL_TIM_Encoder_Start_IT().
 
      (#) The DMA Burst is managed with the two following functions:
          HAL_TIM_DMABurst_WriteStart()
@@ -136,8 +136,8 @@
     (+) PWM_MspDeInitCallback             : TIM PWM Msp DeInit Callback.
     (+) OnePulse_MspInitCallback          : TIM One Pulse Msp Init Callback.
     (+) OnePulse_MspDeInitCallback        : TIM One Pulse Msp DeInit Callback.
-    (+) Encoder_MspInitCallback           : TIM encoder Msp Init Callback.
-    (+) Encoder_MspDeInitCallback         : TIM encoder Msp DeInit Callback.
+    (+) Encoder_MspInitCallback           : TIM Encoder Msp Init Callback.
+    (+) Encoder_MspDeInitCallback         : TIM Encoder Msp DeInit Callback.
     (+) HallSensor_MspInitCallback        : TIM Hall Sensor Msp Init Callback.
     (+) HallSensor_MspDeInitCallback      : TIM Hall Sensor Msp DeInit Callback.
     (+) PeriodElapsedCallback             : TIM Period Elapsed Callback.
@@ -2972,41 +2972,41 @@ HAL_StatusTypeDef HAL_TIM_OnePulse_Stop_IT(TIM_HandleTypeDef *htim, uint32_t Out
   * @}
   */
 
-/** @defgroup TIM_Exported_Functions_Group6 TIM encoder functions
-  *  @brief    TIM encoder functions
+/** @defgroup TIM_Exported_Functions_Group6 TIM Encoder functions
+  *  @brief    TIM Encoder functions
   *
 @verbatim
   ==============================================================================
-                          ##### TIM encoder functions #####
+                          ##### TIM Encoder functions #####
   ==============================================================================
   [..]
     This section provides functions allowing to:
-    (+) Initialize and configure the TIM encoder.
-    (+) De-initialize the TIM encoder.
-    (+) Start the TIM encoder.
-    (+) Stop the TIM encoder.
-    (+) Start the TIM encoder and enable interrupt.
-    (+) Stop the TIM encoder and disable interrupt.
-    (+) Start the TIM encoder and enable DMA transfer.
-    (+) Stop the TIM encoder and disable DMA transfer.
+    (+) Initialize and configure the TIM Encoder.
+    (+) De-initialize the TIM Encoder.
+    (+) Start the TIM Encoder.
+    (+) Stop the TIM Encoder.
+    (+) Start the TIM Encoder and enable interrupt.
+    (+) Stop the TIM Encoder and disable interrupt.
+    (+) Start the TIM Encoder and enable DMA transfer.
+    (+) Stop the TIM Encoder and disable DMA transfer.
 
 @endverbatim
   * @{
   */
 /**
-  * @brief  Initializes the TIM encoder Interface and initialize the associated handle.
+  * @brief  Initializes the TIM Encoder Interface and initialize the associated handle.
   * @note   Switching from Center Aligned counter mode to Edge counter mode (or reverse)
   *         requires a timer reset to avoid unexpected direction
   *         due to DIR bit readonly in center aligned mode.
   *         Ex: call @ref HAL_TIM_Encoder_DeInit() before HAL_TIM_Encoder_Init()
-  * @note   encoder mode and External clock mode 2 are not compatible and must not be selected together
+  * @note   Encoder mode and External clock mode 2 are not compatible and must not be selected together
   *         Ex: A call for @ref HAL_TIM_Encoder_Init will erase the settings of @ref HAL_TIM_ConfigClockSource
   *         using TIM_CLOCKSOURCE_ETRMODE2 and vice versa
-  * @note   When the timer instance is initialized in encoder mode, timer
+  * @note   When the timer instance is initialized in Encoder mode, timer
   *         channels 1 and channel 2 are reserved and cannot be used for other
   *         purpose.
-  * @param  htim TIM encoder Interface handle
-  * @param  sConfig TIM encoder Interface configuration structure
+  * @param  htim TIM Encoder Interface handle
+  * @param  sConfig TIM Encoder Interface configuration structure
   * @retval HAL status
   */
 HAL_StatusTypeDef HAL_TIM_Encoder_Init(TIM_HandleTypeDef *htim,  TIM_Encoder_InitTypeDef *sConfig)
@@ -3063,7 +3063,7 @@ HAL_StatusTypeDef HAL_TIM_Encoder_Init(TIM_HandleTypeDef *htim,  TIM_Encoder_Ini
   /* Reset the SMS and ECE bits */
   htim->Instance->SMCR &= ~(TIM_SMCR_SMS | TIM_SMCR_ECE);
 
-  /* Configure the Time base in the encoder Mode */
+  /* Configure the Time base in the Encoder Mode */
   TIM_Base_SetConfig(htim->Instance, &htim->Init);
 
   /* Get the TIMx SMCR register value */
@@ -3119,8 +3119,8 @@ HAL_StatusTypeDef HAL_TIM_Encoder_Init(TIM_HandleTypeDef *htim,  TIM_Encoder_Ini
 
 
 /**
-  * @brief  DeInitializes the TIM encoder interface
-  * @param  htim TIM encoder Interface handle
+  * @brief  DeInitializes the TIM Encoder interface
+  * @param  htim TIM Encoder Interface handle
   * @retval HAL status
   */
 HAL_StatusTypeDef HAL_TIM_Encoder_DeInit(TIM_HandleTypeDef *htim)
@@ -3164,8 +3164,8 @@ HAL_StatusTypeDef HAL_TIM_Encoder_DeInit(TIM_HandleTypeDef *htim)
 }
 
 /**
-  * @brief  Initializes the TIM encoder Interface MSP.
-  * @param  htim TIM encoder Interface handle
+  * @brief  Initializes the TIM Encoder Interface MSP.
+  * @param  htim TIM Encoder Interface handle
   * @retval None
   */
 __weak void HAL_TIM_Encoder_MspInit(TIM_HandleTypeDef *htim)
@@ -3179,8 +3179,8 @@ __weak void HAL_TIM_Encoder_MspInit(TIM_HandleTypeDef *htim)
 }
 
 /**
-  * @brief  DeInitializes TIM encoder Interface MSP.
-  * @param  htim TIM encoder Interface handle
+  * @brief  DeInitializes TIM Encoder Interface MSP.
+  * @param  htim TIM Encoder Interface handle
   * @retval None
   */
 __weak void HAL_TIM_Encoder_MspDeInit(TIM_HandleTypeDef *htim)
@@ -3194,8 +3194,8 @@ __weak void HAL_TIM_Encoder_MspDeInit(TIM_HandleTypeDef *htim)
 }
 
 /**
-  * @brief  Starts the TIM encoder Interface.
-  * @param  htim TIM encoder Interface handle
+  * @brief  Starts the TIM Encoder Interface.
+  * @param  htim TIM Encoder Interface handle
   * @param  Channel TIM Channels to be enabled
   *          This parameter can be one of the following values:
   *            @arg TIM_CHANNEL_1: TIM Channel 1 selected
@@ -3288,8 +3288,8 @@ HAL_StatusTypeDef HAL_TIM_Encoder_Start(TIM_HandleTypeDef *htim, uint32_t Channe
 }
 
 /**
-  * @brief  Stops the TIM encoder Interface.
-  * @param  htim TIM encoder Interface handle
+  * @brief  Stops the TIM Encoder Interface.
+  * @param  htim TIM Encoder Interface handle
   * @param  Channel TIM Channels to be disabled
   *          This parameter can be one of the following values:
   *            @arg TIM_CHANNEL_1: TIM Channel 1 selected
@@ -3348,8 +3348,8 @@ HAL_StatusTypeDef HAL_TIM_Encoder_Stop(TIM_HandleTypeDef *htim, uint32_t Channel
 }
 
 /**
-  * @brief  Starts the TIM encoder Interface in interrupt mode.
-  * @param  htim TIM encoder Interface handle
+  * @brief  Starts the TIM Encoder Interface in interrupt mode.
+  * @param  htim TIM Encoder Interface handle
   * @param  Channel TIM Channels to be enabled
   *          This parameter can be one of the following values:
   *            @arg TIM_CHANNEL_1: TIM Channel 1 selected
@@ -3448,8 +3448,8 @@ HAL_StatusTypeDef HAL_TIM_Encoder_Start_IT(TIM_HandleTypeDef *htim, uint32_t Cha
 }
 
 /**
-  * @brief  Stops the TIM encoder Interface in interrupt mode.
-  * @param  htim TIM encoder Interface handle
+  * @brief  Stops the TIM Encoder Interface in interrupt mode.
+  * @param  htim TIM Encoder Interface handle
   * @param  Channel TIM Channels to be disabled
   *          This parameter can be one of the following values:
   *            @arg TIM_CHANNEL_1: TIM Channel 1 selected
@@ -3510,8 +3510,8 @@ HAL_StatusTypeDef HAL_TIM_Encoder_Stop_IT(TIM_HandleTypeDef *htim, uint32_t Chan
 }
 
 /**
-  * @brief  Starts the TIM encoder Interface in DMA mode.
-  * @param  htim TIM encoder Interface handle
+  * @brief  Starts the TIM Encoder Interface in DMA mode.
+  * @param  htim TIM Encoder Interface handle
   * @param  Channel TIM Channels to be enabled
   *          This parameter can be one of the following values:
   *            @arg TIM_CHANNEL_1: TIM Channel 1 selected
@@ -3726,8 +3726,8 @@ HAL_StatusTypeDef HAL_TIM_Encoder_Start_DMA(TIM_HandleTypeDef *htim, uint32_t Ch
 }
 
 /**
-  * @brief  Stops the TIM encoder Interface in DMA mode.
-  * @param  htim TIM encoder Interface handle
+  * @brief  Stops the TIM Encoder Interface in DMA mode.
+  * @param  htim TIM Encoder Interface handle
   * @param  Channel TIM Channels to be enabled
   *          This parameter can be one of the following values:
   *            @arg TIM_CHANNEL_1: TIM Channel 1 selected
@@ -5803,8 +5803,8 @@ __weak void HAL_TIM_ErrorCallback(TIM_HandleTypeDef *htim)
   *          @arg @ref HAL_TIM_PWM_MSPDEINIT_CB_ID PWM MspDeInit Callback ID
   *          @arg @ref HAL_TIM_ONE_PULSE_MSPINIT_CB_ID One Pulse MspInit Callback ID
   *          @arg @ref HAL_TIM_ONE_PULSE_MSPDEINIT_CB_ID One Pulse MspDeInit Callback ID
-  *          @arg @ref HAL_TIM_ENCODER_MSPINIT_CB_ID encoder MspInit Callback ID
-  *          @arg @ref HAL_TIM_ENCODER_MSPDEINIT_CB_ID encoder MspDeInit Callback ID
+  *          @arg @ref HAL_TIM_ENCODER_MSPINIT_CB_ID Encoder MspInit Callback ID
+  *          @arg @ref HAL_TIM_ENCODER_MSPDEINIT_CB_ID Encoder MspDeInit Callback ID
   *          @arg @ref HAL_TIM_HALL_SENSOR_MSPINIT_CB_ID Hall Sensor MspInit Callback ID
   *          @arg @ref HAL_TIM_HALL_SENSOR_MSPDEINIT_CB_ID Hall Sensor MspDeInit Callback ID
   *          @arg @ref HAL_TIM_PERIOD_ELAPSED_CB_ID Period Elapsed Callback ID
@@ -6047,8 +6047,8 @@ HAL_StatusTypeDef HAL_TIM_RegisterCallback(TIM_HandleTypeDef *htim, HAL_TIM_Call
   *          @arg @ref HAL_TIM_PWM_MSPDEINIT_CB_ID PWM MspDeInit Callback ID
   *          @arg @ref HAL_TIM_ONE_PULSE_MSPINIT_CB_ID One Pulse MspInit Callback ID
   *          @arg @ref HAL_TIM_ONE_PULSE_MSPDEINIT_CB_ID One Pulse MspDeInit Callback ID
-  *          @arg @ref HAL_TIM_ENCODER_MSPINIT_CB_ID encoder MspInit Callback ID
-  *          @arg @ref HAL_TIM_ENCODER_MSPDEINIT_CB_ID encoder MspDeInit Callback ID
+  *          @arg @ref HAL_TIM_ENCODER_MSPINIT_CB_ID Encoder MspInit Callback ID
+  *          @arg @ref HAL_TIM_ENCODER_MSPDEINIT_CB_ID Encoder MspDeInit Callback ID
   *          @arg @ref HAL_TIM_HALL_SENSOR_MSPINIT_CB_ID Hall Sensor MspInit Callback ID
   *          @arg @ref HAL_TIM_HALL_SENSOR_MSPDEINIT_CB_ID Hall Sensor MspDeInit Callback ID
   *          @arg @ref HAL_TIM_PERIOD_ELAPSED_CB_ID Period Elapsed Callback ID
@@ -6128,12 +6128,12 @@ HAL_StatusTypeDef HAL_TIM_UnRegisterCallback(TIM_HandleTypeDef *htim, HAL_TIM_Ca
         break;
 
       case HAL_TIM_ENCODER_MSPINIT_CB_ID :
-        /* Legacy weak encoder Msp Init Callback */
+        /* Legacy weak Encoder Msp Init Callback */
         htim->Encoder_MspInitCallback           = HAL_TIM_Encoder_MspInit;
         break;
 
       case HAL_TIM_ENCODER_MSPDEINIT_CB_ID :
-        /* Legacy weak encoder Msp DeInit Callback */
+        /* Legacy weak Encoder Msp DeInit Callback */
         htim->Encoder_MspDeInitCallback         = HAL_TIM_Encoder_MspDeInit;
         break;
 
@@ -6273,12 +6273,12 @@ HAL_StatusTypeDef HAL_TIM_UnRegisterCallback(TIM_HandleTypeDef *htim, HAL_TIM_Ca
         break;
 
       case HAL_TIM_ENCODER_MSPINIT_CB_ID :
-        /* Legacy weak encoder Msp Init Callback */
+        /* Legacy weak Encoder Msp Init Callback */
         htim->Encoder_MspInitCallback      = HAL_TIM_Encoder_MspInit;
         break;
 
       case HAL_TIM_ENCODER_MSPDEINIT_CB_ID :
-        /* Legacy weak encoder Msp DeInit Callback */
+        /* Legacy weak Encoder Msp DeInit Callback */
         htim->Encoder_MspDeInitCallback    = HAL_TIM_Encoder_MspDeInit;
         break;
 
@@ -6381,8 +6381,8 @@ HAL_TIM_StateTypeDef HAL_TIM_OnePulse_GetState(TIM_HandleTypeDef *htim)
 }
 
 /**
-  * @brief  Return the TIM encoder Mode handle state.
-  * @param  htim TIM encoder Interface handle
+  * @brief  Return the TIM Encoder Mode handle state.
+  * @param  htim TIM Encoder Interface handle
   * @retval HAL state
   */
 HAL_TIM_StateTypeDef HAL_TIM_Encoder_GetState(TIM_HandleTypeDef *htim)
@@ -6391,7 +6391,7 @@ HAL_TIM_StateTypeDef HAL_TIM_Encoder_GetState(TIM_HandleTypeDef *htim)
 }
 
 /**
-  * @brief  Return the TIM encoder Mode handle state.
+  * @brief  Return the TIM Encoder Mode handle state.
   * @param  htim TIM handle
   * @retval Active channel
   */

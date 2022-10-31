@@ -1,13 +1,31 @@
 #include "motor.hpp"
+#include "transporter_usart.hpp"
+#include "main.h"
+#include "can.h"
+#include "cmsis_os.h"
+#include <vector>
+
+//重载new 和 delete运算符
+void * operator new(size_t size)
+{
+    //printf("operator new\n");
+    auto ptr = pvPortMalloc(size);
+    memset(ptr,0,size);
+    return ptr;
+}
+
+void operator delete(void *m)
+{
+    vPortFree(m);
+}
 
 namespace motor {
     /** 静态变量初始化 **/
     bool Motor::config_error = false;
-    std::vector<sCanSendMsg> Motor::sendMsg_;
+    std::vector<sCanSendMsg> *Motor::sendMsg_ = nullptr;
     privateNS::sBuffer *Motor::ptrCurrents [6] = {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}; //六种类型的指针
     communication::TransporterCan* Motor::ptrCan1_ = nullptr;
     communication::TransporterCan* Motor::ptrCan2_ = nullptr;
-
 
     void Motor::sloveID() {
         if(type_ == M3508_E){
@@ -46,7 +64,7 @@ namespace motor {
             printf("config error!!!!\n");
         }
         else{
-            for(sCanSendMsg msg : sendMsg_){
+            for(sCanSendMsg msg : *sendMsg_){
                 //printf("setCurrent:%d\n",(int16_t)*msg.current);
                 /** 将电机电流信息填充到buffer数组中并设置stdid **/
                 if(ptrCurrents[msg.index] != nullptr){
@@ -87,15 +105,14 @@ namespace motor {
 
 
     Motor::~Motor() {
-        if(sendMsg_.empty()){
-            sendMsg_.~vector();
-            for(int i = 0 ;i<6;i++){
-                if(ptrCurrents[i]!= nullptr){
-                    delete [] ptrCurrents[i];
+        if(sendMsg_!= nullptr){
+            if(sendMsg_->empty()){
+                sendMsg_->~vector();
+                for(auto & ptrCurrent : ptrCurrents){
+                    delete [] ptrCurrent;
                 }
             }
         }
     }
 
-
-} // controller
+} // motor

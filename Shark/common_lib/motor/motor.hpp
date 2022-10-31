@@ -1,10 +1,13 @@
 #ifndef INFANTRYC_MOTOR_HPP
 #define INFANTRYC_MOTOR_HPP
+#include <vector>
 #include "encoder.hpp"
 #include "cascade_pid.hpp"
 #include "general_pid.hpp"
 #include "control_interface.hpp"
-#include <vector>
+#include "null_pid.hpp"
+#include "cmsis_os.h"
+
 
 namespace privateNS{
     enum eBuferIndex{
@@ -56,6 +59,7 @@ namespace motor {
         GM_RAMMER_E = 2,
         GM_FRIC_0E = 3,
         GM_FRIC_1E = 4,
+        GM_FRIC_2E = 5,
 
         LEG_LT_E = 0,
         LEG_LB_E = 1,
@@ -139,13 +143,19 @@ namespace motor {
             sloveID();
             encoder_.setStdId(recID_);     /** 设置电调反馈的stdid,用来编码 **/
             direct_cur_ = 0.0;
-
+            if(sendMsg_ == nullptr){
+                //printf("1 new begin\n");
+                sendMsg_ = new std::vector<sCanSendMsg>;
+                //printf("1 new end\n\n");
+            }
             /** 判断是否配置错误 **/
-            for(sCanSendMsg msg : sendMsg_){
-                /** can相同 stdid相同 摆放的位置也相同,协议上冲突 **/
-                if(msg.stdId == sendID_ && msg.can == can_ && msg.begin == (2*((id-1)%4))){
-                    config_error  = true;
-                    break;
+            if(sendMsg_!= nullptr){
+                for(sCanSendMsg msg : *sendMsg_){
+                    /** can相同 stdid相同 摆放的位置也相同,协议上冲突 **/
+                    if(msg.stdId == sendID_ && msg.can == can_ && msg.begin == (2*((id-1)%4))){
+                        config_error  = true;
+                        break;
+                    }
                 }
             }
             /** 没有出错，才把这个电机放入电流发送的vector中 **/
@@ -161,18 +171,25 @@ namespace motor {
 
                     /** 将电机需要通过can发送的信息保存到static vector var中 **/
                     sCanSendMsg temp(can_, sendID_, id_, ctrl_->getCurrentOut());
-                    sendMsg_.push_back(temp);
-
+                    if(sendMsg_!= nullptr){
+                        sendMsg_->push_back(temp);
+                    }
                     //动态分配空间 电流发送的buffer
+                    //printf("2\n");
                     ptrCurrents[temp.index] = new privateNS::sBuffer;
                 }
-
                 else{ //// 没控制，则把直接设置的电流值地址绑定为发送来源
                     sCanSendMsg temp(can_, sendID_, id_, direct_cur_);
-                    sendMsg_.push_back(temp);
-
+                    if(sendMsg_!= nullptr){
+                        //printf("pushback new begin\n");
+                        sendMsg_->push_back(temp);
+                        //printf("pushback new end\n\n");
+                    }
                     //// 动态分配空间 电流发送的buffer
+                    //printf("3 new begin\n");
                     ptrCurrents[temp.index] = new privateNS::sBuffer;
+                    //printf("3 new end\n\n");
+                    ctrl_ = &nullPid_;
                 }
 
                 //// 绑定发送电流的can  指针指向transporter_can类地址
@@ -220,6 +237,8 @@ namespace motor {
     public:
         controller::ControlInterface* ctrl_;
         Encoder encoder_;
+
+
     /** private member variable **/
     private:
         eMotorApp app_;
@@ -231,13 +250,18 @@ namespace motor {
         uint32_t sendID_{};
         uint32_t  recID_{};
         float direct_cur_;
+        controller::NullPID nullPid_{};
 
+
+        static privateNS::sBuffer *ptrCurrents[6]; //六种类型的指针
+        static std::vector<sCanSendMsg> *sendMsg_;
         static communication::TransporterCan* ptrCan1_;
         static communication::TransporterCan* ptrCan2_;
         //// 记录所有点击需要发送的目的地和电流信息
-        static privateNS::sBuffer *ptrCurrents[6]; //六种类型的指针
+
         static bool config_error;
-        static std::vector<sCanSendMsg> sendMsg_;
+
+
     };
 
 } // controller
