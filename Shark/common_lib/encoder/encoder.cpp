@@ -13,7 +13,7 @@ namespace motor {
             encoder_.isConnect = true;
             times_ = 0; //discount flag
             encoder_.angel =  (float)(((float)getDJiMotorData(0)) * 360.0 / 8192.0);
-            encoder_.speed = (float)getDJiMotorData(2);
+            encoder_.speed = ((float)getDJiMotorData(2))/reduction_ratio_;
             encoder_.torque = getDJiMotorData(4);
             encoder_.tempature = can_->buf_rx_.getBufPtr()[6];
             allAngelRecoderLoop();
@@ -46,7 +46,7 @@ namespace motor {
         accum_angel_.nowAngel = encoder_.angel;
         accum_angel_.increAngel  = getContinueAngel(accum_angel_.lastAngel,accum_angel_.nowAngel);
         accum_angel_.allAngel +=  accum_angel_.increAngel;
-        encoder_.angelAll = accum_angel_.allAngel;
+        encoder_.angelAll = accum_angel_.allAngel/reduction_ratio_;
     }
 
     int16_t Encoder::getDJiMotorData(uint8_t index) {
@@ -55,5 +55,9 @@ namespace motor {
 
     void Encoder::setStdId(uint32_t stdId) {
         stdID_ = stdId;
+    }
+
+    void Encoder::setReductionRatio(float ratio) {
+        reduction_ratio_ = ratio;
     }
 } // controller

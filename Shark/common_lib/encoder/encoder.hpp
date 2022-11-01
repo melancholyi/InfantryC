@@ -33,6 +33,7 @@ namespace motor {
             memset(&accum_angel_,0,sizeof (accum_angel_));
             stdID_ = 0;
             times_ = 0;
+            reduction_ratio_ = 1;
         }
         /** 编码loop **/
         void encoderSloveLoop();
@@ -43,6 +44,7 @@ namespace motor {
         }
         /** 设置id **/
         void setStdId(uint32_t stdId);
+        void setReductionRatio(float ratio);
 
     private:
         const float ContinueAngelMax =132.0;//角度连续化比较角度
@@ -58,6 +60,7 @@ namespace motor {
         EncoderAngelAll accum_angel_{}; /** 角度累加结构体 **/
         communication::TransporterCan* can_; /** 指向can封装类的指针 **/
         uint16_t  times_;         /** 电机失联次数,1ms+1 **/
+        float reduction_ratio_; /** 电机减速比 **/
     };
 
 } // controller

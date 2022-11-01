@@ -10,6 +10,9 @@
 
 
 namespace privateNS{
+    const float M3508_RATIO = 19.203208;
+    const float M6020_RATIO = 1;
+    const float M2006_RATIO = 36;
     enum eBuferIndex{
         CAN1_0x200_I0 = 0,
         CAN2_0x200_I1 = 1,
@@ -142,6 +145,12 @@ namespace motor {
             /** constructor function body:?? **/
             sloveID();
             encoder_.setStdId(recID_);     /** 设置电调反馈的stdid,用来编码 **/
+            if(type_ == M3508_E)
+                encoder_.setReductionRatio(privateNS::M3508_RATIO);
+            else if(type_ == M6020_E)
+                encoder_.setReductionRatio(privateNS::M6020_RATIO);
+            else if(type_ == M2006_E)
+                encoder_.setReductionRatio(privateNS::M2006_RATIO);
             direct_cur_ = 0.0;
             if(sendMsg_ == nullptr){
                 //printf("1 new begin\n");
@@ -232,6 +241,7 @@ namespace motor {
             else if(input < -(float)maxCur_) input = -((float)maxCur_ - 500);
             return input;
         };
+
 
     /** public member variable **/
     public:

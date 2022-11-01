@@ -326,7 +326,48 @@ extern "C" void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan){
     MotorArr[motor::GM_YAW_E].encoder_.encoderSloveLoop();
 }
 
+
+
 ```
+
+# APP层说明
+！！！！！！  
+## 体验  
+- 我自己试用了一下，感觉还是有一些问题，主要是头文件包含和命名空间的不方便-2022/11/1
+- 封装性强的话，不同文件需要extern，类似于Hal库extern的各种底层handle，但是不用担心数据的安全性，类本身就是主打封装性的，本身就是一个安全的集合-2022/11/1
+- gimbal_task.cpp中写了一个简单的速度环和位置环控制两个电机demo-2022/11/1
+## 应用层结构和任务结构
+```
+|-- Shark
+|   |-- App //自己构建的上层应用
+|   |   |-- gimbal  
+|   |   `-- vision
+|   |-- Task //任务级
+|   |   |-- debug_task.cpp
+|   |   `-- gimbal_task.cpp  
+
+```
+
+# BUG修复
+## 1-全局变量初始化问题-2022/10/31
+- **bug描述:** motor类中有一个```static vector<sCanSendMsg> sendMsg_```的变量，他是一个全局变量，而我将motor类也实例化了为一个全局对象并且在motor的构造函数中对vector容器进行push_back的操作，从而放在不同文件夹中有时可以成功，有时不可以成功
+- **问题原因:** sendMsg_是一个全局变量，而motor实例化对象也是全局变量，而vector优势i动态分配的，所以无法确定vector先初始化还是motor的构造函数先被执行，从而motor构造函数先执行的话，就会在一个未构造的vector里面push_back，其实本应该程序崩溃，但是因为而后vector类型变量sendMsg_进行初始化了，所以就不行了。(询问了上交大佬-**花山甲**，感谢！！😘) 
+ ![img](./ReadmeSrc/bug1-why.jpg) 
+
+ 
+
+- **问题解决:** 将sendMsg_定义为vector指针，然后再motor的构造函数中new一个vector指向它，如下：
+```cpp
+//声明
+static std::vector<sCanSendMsg> *sendMsg_;
+//定义
+std::vector<sCanSendMsg> Motor::sendMsg_;
+//！！！！！ 
+//↓初始化方式叫作静态初始化，在编译的时候就会找到位置进行初始化，而vector则是动态初始化(调用构造函数进行初始化)
+std::vector<sCanSendMsg> *Motor::sendMsg_ = nullptr;
+```
+## 2-电机编码时减速比忘记设置了，已添加——2022/11/1
+
 
 
 
